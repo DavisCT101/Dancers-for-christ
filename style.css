@@ -933,37 +933,25 @@ footer ul {
   margin-bottom: 18px;
   color: inherit;
 }
-@media (max-width: 860px) {
-  .sg-stack {
-    width: 60vw;
-    top: 40%;
-  }
-  .sg-eye {
-    top: calc(104px + var(--top));
-    font-size: 0.68rem;
-  }
-  .sg-tabs {
-    top: calc(134px + var(--top));
-  }
-  .sg-meta {
-    max-width: calc(100% - 40px);
-    bottom: 178px;
-  }
-  .sg-no {
-    top: calc(150px + var(--top));
-    width: 64px;
-    height: 64px;
-    font-size: 1.2rem;
-    transform: none;
-  }
-  .sg-collab {
-    bottom: 92px;
-    gap: 12px;
-  }
-  .sg-collab > span {
-    font-size: 0.65rem;
-  }
+/* ===== SONGS: MOBILE / TABLET ===== */
+@media(max-width:860px){
+.sg-pin{display:flex;flex-direction:column;padding:calc(92px + var(--top)) 20px 0}
+.sg-eye{position:static;font-size:.64rem;letter-spacing:.2em;padding-right:70px}
+.sg-tabs{position:static;margin-top:10px}
+.sg-no{top:calc(96px + var(--top));right:20px;width:58px;height:58px;font-size:1.05rem;transform:none}
+.sg-stack{position:relative;left:auto;top:auto;transform:none;flex:none;width:clamp(150px,calc(100svh - 504px),82vw);margin:max(14px,2svh) auto 0;clip-path:inset(-90% -25% -6% -25%)}
+.sg-meta{position:relative;left:auto;bottom:auto;max-width:100%;margin-top:max(20px,3svh)}
+.sg-year{font-size:clamp(2.1rem,11vw,3rem)}
+.sg-title{font-size:clamp(1.5rem,7vw,2.2rem);margin:4px 0 8px}
+.sg-kind{font-size:.82rem;margin-bottom:12px}
+.sgb{padding:10px 20px;font-size:.74rem}
+.sg-hint{margin-top:10px;font-size:.78rem}
+.sg-collab{left:20px;right:0;bottom:88px;gap:12px;font-size:.64rem}.mqt{font-size:.9rem;gap:22px}
+.now{left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));max-width:none}
+.now .nt{flex:1;min-width:0}.nt b{max-width:none}.now .sgb{margin-left:auto}
+.lyr{max-height:60vh}
 }
+@media(max-width:860px) and (max-height:700px){.sg-hint,.sg-eye{display:none}.sg-stack{margin-top:10px;width:clamp(140px,calc(100svh - 440px),82vw)}.sg-meta{margin-top:14px}.sg-year{font-size:2rem}}
 @media (prefers-reduced-motion: reduce) {
   .mqt,
   .wf i {
