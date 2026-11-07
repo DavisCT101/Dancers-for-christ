@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>DFC | Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=Permanent+Marker&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Extra styling for standalone admin screen */
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+      .admin-container {
+        width: min(600px, 100%);
+        background: var(--bg2);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: 32px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      .admin-container h2 {
+        font: 400 2rem var(--display);
+        color: var(--amber);
+        margin-bottom: 20px;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Login Form Screen -->
+    <div class="admin-container" id="loginCard">
+      <h2>Admin Sign In</h2>
+      <form id="lf">
+        <label
+          >Username<input id="lu" autocomplete="username" required
+        /></label>
+        <label
+          >Password<input
+            id="lp"
+            type="password"
+            autocomplete="current-password"
+            required
+        /></label>
+        <button class="btn" style="width: 100%; margin-top: 10px">
+          Sign in
+        </button>
+        <div class="msg" id="lm" role="alert"></div>
+      </form>
+      <a
+        href="index.html"
+        class="btn ghost"
+        style="
+          width: 100%;
+          text-align: center;
+          margin-top: 10px;
+          display: block;
+        "
+        >Back to Website</a
+      >
+    </div>
+
+    <!-- Management Panel Screen (Hidden until logged in) -->
+    <div class="admin-container hidden" id="panelCard">
+      <div class="top-bar">
+        <h2>Manage Content</h2>
+        <button class="btn ghost" id="out" style="padding: 8px 16px">
+          Sign out
+        </button>
+      </div>
+
+      <h3>Add an update</h3>
+      <form id="uf">
+        <label>Title<input id="ut" required /></label>
+        <label
+          >Date or note<input id="ud" placeholder="Wed 7pm, Assembly Hall"
+        /></label>
+        <label
+          >Image link<input
+            id="ui"
+            placeholder="images/photo1.jpg or https://..."
+        /></label>
+        <button class="btn">Add update</button>
+      </form>
+      <div id="ul" style="margin-bottom: 24px"></div>
+
+      <h3 style="margin-top: 22px">Add an album</h3>
+      <form id="af">
+        <label>Album title<input id="at" required /></label>
+        <label
+          >Cover image link<input
+            id="ai"
+            placeholder="images/cover1.jpg or https://..."
+        /></label>
+        <label
+          >Google Photos share link<input
+            id="ag"
+            type="url"
+            required
+            placeholder="https://photos.app.goo.gl/..."
+        /></label>
+        <button class="btn">Add album</button>
+      </form>
+      <div id="al" style="margin-bottom: 20px"></div>
+
+      <a
+        href="index.html"
+        class="btn ghost"
+        style="width: 100%; text-align: center; display: block"
+        >View Live Website</a
+      >
+    </div>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
