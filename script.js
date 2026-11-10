@@ -4,8 +4,11 @@ const VERSES = [["Let them praise his name in the dance.", "Psalm 149:3"], ["Pra
 const $ = s => document.querySelector(s);
 const store = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d } catch (e) { return d } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)) } catch (e) { } } };
 
-let updates = store.get('dfc_u', [{ t: 'Prayer Kesha', d: 'Friday, 7pm, Mainhall', i: 'assets/updates/sun.jpeg' }, { t: 'The Fruit of the spirit', d: 'Wednesday, 5:50pm, LH 24', i: 'assets/updates/sun1.jpeg' }, { t: 'Evangelism', d: 'Friday, 6:50pm, Pavilion', i: 'assets/updates/sun4.jpeg' }, { t: 'Intercessory Prayers', d: 'Sunday, 7am, Mainhall', i: 'assets/updates/sun3.jpeg' }]);
-let albums = store.get('dfc_a', [{ t: 'Creative Night', i: 'assets/images/img15.jpg', g: 'https://photos.app.goo.gl/YNw3VYgW5zLePnJZ9' }]);
+let updates = store.get('dfc_u', [ { t: 'Bible Study', d: 'Monday, 7:00-8:00, Lh32', i: 'assets/updates/t5.jpeg' },
+  { t: 'Inreach Evangelism', d: 'Wednesday, 6:50pm-8:00, Pavilion', i: 'assets/updates/t1.jpeg' },
+  { t: 'Annual General Meeting', d: 'Sunday, 4:00pm-6:00, Mainhall', i: 'assets/updates/t4.jpeg' },
+  { t: 'Intercessory Prayers', d: 'Sunday, 7am, Mainhall', i: 'assets/updates/sun3.jpeg' },
+  { t: 'Congratulations to our new leaders', d: 'Grace, wisdom and persevirance be upon them', i: 'assets/updates/t.jpeg' }]);
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const safe = u => /^(https?:\/\/[^\s'"()]+|[\w\-./%]+)$/.test(u || '') ? u : '';
@@ -32,7 +35,12 @@ let idx = 0, timer, pv = 3;
 function renderUpdates() {
   const ct = $('#ct');
   if (!updates.length) { ct.innerHTML = '<div class="empty" style="width:100%">No updates yet. Check back soon.</div>'; $('#dots').innerHTML = ''; return }
-  ct.innerHTML = updates.map(u => `<div class="sl"><div class="im" style="${safe(u.i) ? `background-image:url('${esc(u.i)}')` : ''}"></div><h3>${esc(u.t)}</h3><p>${esc(u.d || '')}</p></div>`).join('');
+ct.innerHTML = updates.map(u => {
+  const imgSrc = safe(u.i);
+  const styleAttr = imgSrc ? `style="--bg-img: url('${esc(imgSrc)}')"` : '';
+  const imgTag = imgSrc ? `<img src="${esc(imgSrc)}" alt="${esc(u.t)}">` : '';
+  return `<div class="sl"><div class="im" ${styleAttr}>${imgTag}</div><h3>${esc(u.t)}</h3><p>${esc(u.d || '')}</p></div>`;
+}).join('');
   pv = innerWidth < 640 ? 1 : innerWidth < 1000 ? 2 : 3; ct.style.setProperty('--pv', pv); go(0)
 }
 function go(i) {
