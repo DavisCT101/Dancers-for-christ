@@ -7,6 +7,8 @@ const store = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) || 
 let updates = store.get('dfc_u', [ { t: 'Bible Study', d: 'Monday, 7:00-8:00, Lh32', i: 'assets/updates/t5.jpeg' },
   { t: 'Inreach Evangelism', d: 'Wednesday, 6:50pm-8:00, Pavilion', i: 'assets/updates/t1.jpeg' },
   { t: 'Annual General Meeting', d: 'Sunday, 4:00pm-6:00, Mainhall', i: 'assets/updates/t4.jpeg' },
+  { t: 'Being the doers of the word', d: 'Wenesday, 7pm, Mainhall', i: 'assets/updates/t7.jpeg' },
+  { t: 'The wells of salvation', d: 'Wensday, 5:50pm, Mainhall', i: 'assets/updates/t6.jpeg' }
   { t: 'Intercessory Prayers', d: 'Sunday, 7am, Mainhall', i: 'assets/updates/sun3.jpeg' },
   { t: 'Congratulations to our new leaders', d: 'Grace, wisdom and persevirance be upon them', i: 'assets/updates/t.jpeg' }]);
 
@@ -67,4 +69,41 @@ $('#links').onclick = () => $('#links').classList.remove('open');
 $('#theme').onclick = () => { const r = document.documentElement, l = r.dataset.theme === 'light' || (!r.dataset.theme && matchMedia('(prefers-color-scheme:light)').matches); r.dataset.theme = l ? 'dark' : 'light' };
 const secs = ['home', 'updates', 'songs', 'contact'].map(i => document.getElementById(i));
 addEventListener('scroll', () => { let cur = 'home'; secs.forEach(s => { if (s.getBoundingClientRect().top < 200) cur = s.id }); document.querySelectorAll('.links a').forEach(a => a.classList.toggle('on', a.hash === '#' + cur)) }, { passive: true });
-$('#cf').onsubmit = e => { e.preventDefault(); $('#cm').textContent = 'Message ready. Connect this form to your email service to send it.'; e.target.reset() };
+// $('#cf').onsubmit = e => { e.preventDefault(); $('#cm').textContent = 'Message ready. Connect this form to your email service to send it.'; e.target.reset() };
+/* Contact Form AJAX submission with on-page confirmation */
+document.addEventListener('DOMContentLoaded', () => {
+  const contactForm = $('#cf');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault(); // 100% stops page reload/redirect
+      
+      const msgBox = $('#cm');
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      
+      msgBox.textContent = 'Sending message...';
+      submitBtn.disabled = true;
+
+      const formData = new FormData(contactForm);
+      
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          msgBox.textContent = '✅ Success! Your message has been sent.';
+          contactForm.reset(); // Clears the inputs
+        } else {
+          msgBox.textContent = '❌ ' + (data.message || 'Something went wrong. Please try again.');
+        }
+      } catch (error) {
+        msgBox.textContent = '❌ Network error. Please check your connection.';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  }
+});
