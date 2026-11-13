@@ -9,6 +9,7 @@ let updates = store.get('dfc_u', [ { t: 'Bible Study', d: 'Monday, 7:00-8:00, Lh
   { t: 'Annual General Meeting', d: 'Sunday, 4:00pm-6:00, Mainhall', i: 'assets/updates/t4.jpeg' },
   { t: 'Being the doers of the word', d: 'Wenesday, 7pm, Mainhall', i: 'assets/updates/t7.jpeg' },
   { t: 'The wells of salvation', d: 'Wensday, 5:50pm, Mainhall', i: 'assets/updates/t6.jpeg' },
+ { t: 'Aligning', d: 'Friday, 7pm, Mainhall', i: 'assets/updates/t8.jpeg' },
   { t: 'Intercessory Prayers', d: 'Sunday, 7am, Mainhall', i: 'assets/updates/sun3.jpeg' },
   { t: 'Congratulations to our new leaders', d: 'Grace, wisdom and persevirance be upon them', i: 'assets/updates/t.jpeg' }]);
 
